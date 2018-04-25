@@ -14,7 +14,7 @@ public class MoveMario {
     private final static Dimension BOARD_SIZE = new Dimension(800,400);
 
 
-    public static void levelOne() throws IOException {
+    public static void main(String[] args) throws IOException {
 
         Random random = new Random();
         Coin coin;
@@ -54,7 +54,7 @@ public class MoveMario {
 
         }
 
-        for (int i = 0; i <= 10;  i++) {
+        for (int i = 0; i <= 12;  i++) {
             coin = new Coin();
             coin.setDrawingPriority(-2);
             coin.init(spriteComponent);
@@ -100,10 +100,11 @@ public class MoveMario {
 
 
 
-
+        System.out.println("Level One");
 
 
     }
+
     public static void levelTwo() throws IOException {
 
         Random random = new Random();
@@ -144,7 +145,7 @@ public class MoveMario {
 
         }
 
-        for (int i = 0; i <= 50;  i++) {
+        for (int i = 0; i <= 30;  i++) {
             coin = new Coin();
             coin.setDrawingPriority(-2);
             coin.init(spriteComponent);

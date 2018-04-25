@@ -6,18 +6,19 @@ public class Game implements Runnable{
 
 
     public static void main(String[] args) throws IOException {
-        MoveMario.levelOne();
-
-
+        MoveMario.levelTwo();
 
     }
 
     @Override
     public void run() {
         try {
-            MoveMario.levelOne();
+            MoveMario.levelTwo();
         } catch (IOException e) {
             e.printStackTrace();
         }
+
+        System.out.println("Level Two");
     }
+
 }

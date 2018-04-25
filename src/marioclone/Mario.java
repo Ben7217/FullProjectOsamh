@@ -18,6 +18,7 @@ import java.io.IOException;
 class Mario extends Sprite {
     public static int score = 0;
     private Picture basePic;
+    public Game game = new Game();
 
     Object[] options = {"CONTINUE", "EXIT"};
 
@@ -50,7 +51,7 @@ class Mario extends Sprite {
             if (spriteCollisionEvent.sprite2 instanceof Coin) {
                 spriteCollisionEvent.sprite2.setActive(false);
                 score++;
-                if (Mario.score == 10) {
+                if (Mario.score == 5) {
                     JOptionPane.showMessageDialog(null, "Level one, finished! Coins: " + Mario.score + "!");
                     (new Thread(new Game())).start();
                 }

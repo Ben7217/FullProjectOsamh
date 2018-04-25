@@ -8,15 +8,19 @@ package marioclone;
 import basicgraphics.CollisionEventType;
 import basicgraphics.Sprite;
 import basicgraphics.SpriteCollisionEvent;
+import basicgraphics.SpriteComponent;
 import basicgraphics.images.Picture;
 
+import javax.swing.*;
 import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
 import java.io.IOException;
 
 
 class Mario extends Sprite {
+    private int score = 0;
     private Picture basePic;
+    SpriteComponent sc;
 
     Mario() throws IOException {
         basePic = new Picture("Mario - Walk2.gif");
@@ -36,10 +40,24 @@ class Mario extends Sprite {
     }
 
     @Override
-    public void processEvent(SpriteCollisionEvent ev) {
-        if(ev.eventType == CollisionEventType.WALL) {
+    public void processEvent(SpriteCollisionEvent spriteCollisionEvent) {
+        if(spriteCollisionEvent.eventType == CollisionEventType.WALL) {
             setX(800);
             basePic = basePic.resize(1.1);
+        }
+        if (spriteCollisionEvent.eventType == CollisionEventType.SPRITE) {
+            if (spriteCollisionEvent.sprite2 instanceof Coin) {
+                spriteCollisionEvent.sprite2.setActive(false);
+                score++;
+            }
+        }
+        if (spriteCollisionEvent.eventType == CollisionEventType.SPRITE) {
+            if (spriteCollisionEvent.sprite2 instanceof Block) {
+                setPicture(basePic = new Picture("MarioDeath.png"));
+                spriteCollisionEvent.sprite2.setActive(true);
+                JOptionPane.showMessageDialog(sc, "You lose! Game Over!");
+                System.exit(0);
+            }
         }
     }
 

@@ -39,13 +39,14 @@ public class MoveMario {
             block.init(spriteComponent);
         }
 
+        for (int i = 0; i < 10; i++) {
+            Coin coin = new Coin();
+            coin.setDrawingPriority(-2);
+            coin.init(spriteComponent);
+        }
+
         Ground ground = new Ground();
         ground.setDrawingPriority(0);
-
-
-
-
-
         ground.init(spriteComponent);
 
 
@@ -58,16 +59,16 @@ public class MoveMario {
             public void keyPressed(KeyEvent e) {
                 if (e.getKeyCode() == KeyEvent.VK_UP) {
                     mario.setVelY(-2.0);
-                    if (mario.top() == 400) {
-                        mario.setY(319);
-                    }
+//                    if (mario.top() == 400) {
+//                        mario.setY(319);
+//                    }
 
                 }
                 if (e.getKeyCode() == KeyEvent.VK_RIGHT) {
-                    mario.setVelX(1.0);
+                    mario.setVelX(1.5);
                 }
                 if (e.getKeyCode() == KeyEvent.VK_LEFT) {
-                    mario.setVelX(-1.0);
+                    mario.setVelX(-1.5);
                 }
                 if (e.getKeyCode() == KeyEvent.VK_DOWN) {
                     mario.setVelX(0);

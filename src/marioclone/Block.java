@@ -48,7 +48,8 @@ public class Block extends Sprite {
     @Override
     public void processEvent(SpriteCollisionEvent spriteCollisionEvent) {
         if(spriteCollisionEvent.eventType == CollisionEventType.WALL_INVISIBLE) {
-            if (spriteCollisionEvent.xlo) {
+            if (!spriteCollisionEvent.xlo) {
+            } else {
                 setX(sc.getSize().width - getWidth());
             }
             if (spriteCollisionEvent.xhi) {
@@ -64,9 +65,8 @@ public class Block extends Sprite {
 
         if (spriteCollisionEvent.eventType == CollisionEventType.SPRITE) {
             if (spriteCollisionEvent.sprite2 instanceof Mario) {
-                spriteCollisionEvent.sprite2.setActive(false);
-                JOptionPane.showMessageDialog(sc, "You lose! Game Over!");
-                System.exit(0);
+                spriteCollisionEvent.sprite2.setActive(true);
+
             }
         }
     }

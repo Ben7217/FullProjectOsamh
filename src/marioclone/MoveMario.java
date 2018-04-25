@@ -20,29 +20,35 @@ public class MoveMario {
         mario.setVelX(0);
         mario.setVelY(0);
         mario.setX(0);
-        mario.setY(350);
+        mario.setY(319);
         mario.setDrawingPriority(0);
 
 
         BasicFrame bf = new BasicFrame("Mario Clone");
 
         //Adding Mario sprite to frame
-        SpriteComponent sprintComponent = new SpriteComponent();
-        sprintComponent.setPreferredSize(BOARD_SIZE);
-        bf.add("mario", sprintComponent, 0, 0, 1, 1);
-        sprintComponent.setPreferredSize(BOARD_SIZE);
-        sprintComponent.addSprite(mario);
+        SpriteComponent spriteComponent = new SpriteComponent();
+        spriteComponent.setPreferredSize(BOARD_SIZE);
+        bf.add("mario", spriteComponent, 0, 0, 1, 1);
+        spriteComponent.setPreferredSize(BOARD_SIZE);
+        spriteComponent.addSprite(mario);
 
         Block block = new Block();
         block.setDrawingPriority(-1);
-        Random rand = new Random();
+
+        Ground ground = new Ground();
+        ground.setDrawingPriority(0);
 
 
-        block.init(sprintComponent);
+
+
+
+        block.init(spriteComponent);
+        ground.init(spriteComponent);
 
 
         bf.show();
-        sprintComponent.start(0, 10);
+        spriteComponent.start(0, 10);
 
         bf.addKeyListener(new KeyAdapter() {
 
@@ -51,9 +57,8 @@ public class MoveMario {
                 if (e.getKeyCode() == KeyEvent.VK_UP) {
                     mario.setVelY(-2.0);
                     if (mario.top() == 400) {
-                        mario.setY(350);
+                        mario.setY(319);
                     }
-
 
                 }
                 if (e.getKeyCode() == KeyEvent.VK_RIGHT) {
@@ -70,7 +75,7 @@ public class MoveMario {
             @Override
             public void keyReleased(KeyEvent e) {
                 mario.setVelY(0);
-                mario.setY(350);
+                mario.setY(319);
 
             }
         });

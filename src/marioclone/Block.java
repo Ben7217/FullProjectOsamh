@@ -24,7 +24,7 @@ public class Block extends Sprite {
     public void init(SpriteComponent sc) {
         setPicture(basePic);
         setX(400);
-        setY(300);
+        setY(280);
         setVelX(-2);
 
         sc.addSprite(this);

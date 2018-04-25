@@ -6,36 +6,47 @@ import basicgraphics.SpriteCollisionEvent;
 import basicgraphics.SpriteComponent;
 import basicgraphics.images.Picture;
 import basicshooter.Game;
-import basicshooter.Shooter;
 
-import javax.swing.*;
-import java.awt.*;
 import java.io.IOException;
 import java.util.Random;
 
-public class Block extends Sprite {
+public class QuestionBlocks extends Sprite {
+
     private Picture basePic;
     private Random rand = new Random();
     SpriteComponent sc;
 
-    Block() throws IOException {
-        basePic = new Picture("Mario_brick.png");
+    QuestionBlocks() throws IOException {
+        basePic = new Picture("QuestionBlock1.png");
         setPicture(basePic);
+    }
+
+    private int count = 0;
+
+    @Override
+    public void preMove() {
+        count++;
+        if(count == 100)
+            setPicture(basePic = new Picture("QuestionBlock2.png"));
+        else if(count == 200) {
+            setPicture(basePic = new Picture("QuestionBlock1.png"));
+            count=0;
+        }
     }
 
     public void init(SpriteComponent sc) {
         setPicture(basePic);
 //        setX(400);
-//        setY(280);
+// setY(280);
 
 
         while (true) {
             setVelX(-.5 * rand.nextDouble() - 1);
             sc.addSprite(this);
-            setX(Game.RAND.nextInt(Game.BOARD_SIZE.width)-Game.SMALL);
-            setY(Game.RAND.nextInt(Game.BOARD_SIZE.height)-Game.SMALL);
-            if (Math.abs(getX() - Game.BOARD_SIZE.width / 2) < 2 * Game.BIG
-                    && Math.abs(getY() - Game.BOARD_SIZE.height / 2) < 2 * Game.BIG) {
+            setX(basicshooter.Game.RAND.nextInt(basicshooter.Game.BOARD_SIZE.width)- basicshooter.Game.SMALL);
+            setY(basicshooter.Game.RAND.nextInt(basicshooter.Game.BOARD_SIZE.height)- basicshooter.Game.SMALL);
+            if (Math.abs(getX() - basicshooter.Game.BOARD_SIZE.width / 2) < 2 * basicshooter.Game.BIG
+                    && Math.abs(getY() - basicshooter.Game.BOARD_SIZE.height / 2) < 2 * Game.BIG) {
                 // Overlaps with center, try again
             } else {
                 break;
@@ -63,13 +74,12 @@ public class Block extends Sprite {
             }
         }
 
-//        if (spriteCollisionEvent.eventType == CollisionEventType.SPRITE) {
-//            if (spriteCollisionEvent.sprite2 instanceof Mario) {
-//                spriteCollisionEvent.sprite2.setActive(true);
-//
-//            }
-//        }
-    }
+        if (spriteCollisionEvent.eventType == CollisionEventType.SPRITE) {
+            if (spriteCollisionEvent.sprite2 instanceof Mario) {
+                spriteCollisionEvent.sprite2.setActive(true);
 
+            }
+        }
+    }
 
 }

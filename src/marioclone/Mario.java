@@ -12,14 +12,15 @@ import basicgraphics.SpriteComponent;
 import basicgraphics.images.Picture;
 
 import javax.swing.*;
-import java.awt.event.KeyAdapter;
-import java.awt.event.KeyEvent;
 import java.io.IOException;
 
 
 class Mario extends Sprite {
-    private static int score = 0;
+    public static int score = 0;
     private Picture basePic;
+
+    Object[] options = {"CONTINUE", "EXIT"};
+
     SpriteComponent sc;
 
     Mario() throws IOException {
@@ -49,6 +50,18 @@ class Mario extends Sprite {
             if (spriteCollisionEvent.sprite2 instanceof Coin) {
                 spriteCollisionEvent.sprite2.setActive(false);
                 score++;
+                if (Mario.score == 10) {
+                    JOptionPane.showMessageDialog(null, "Level one, finished! Coins: " + Mario.score + "!");
+                    (new Thread(new Game())).start();
+                }
+//                if (Mario.score == 5) {
+//                    JOptionPane.showMessageDialog(null, "Level two, finished! Coins: " + Mario.score + "!");
+//                    try {
+//                        MoveMario.levelTwo();
+//                    } catch (IOException e) {
+//                        e.printStackTrace();
+//                    }
+//                }
             }
         }
         if (spriteCollisionEvent.eventType == CollisionEventType.SPRITE) {
@@ -56,10 +69,19 @@ class Mario extends Sprite {
                 setPicture(basePic = new Picture("MarioDeath.png"));
                 spriteCollisionEvent.sprite2.setActive(true);
                 JOptionPane.showMessageDialog(sc, "You lose! Game Over! \nCoins: " + score + "!");
-                System.exit(0);
+                int result = JOptionPane.showConfirmDialog(null, "Are you sure you want to quit?",
+                        "Confirm Quit", JOptionPane.YES_NO_CANCEL_OPTION);
+
+                if (result == JOptionPane.YES_OPTION) {
+                    System.exit(0);
+                } else {
+                    (new Thread(new Game())).start();
+                }
             }
         }
+
     }
+
 
 
 

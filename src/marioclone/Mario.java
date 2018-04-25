@@ -18,7 +18,7 @@ import java.io.IOException;
 
 
 class Mario extends Sprite {
-    private int score = 0;
+    private static int score = 0;
     private Picture basePic;
     SpriteComponent sc;
 
@@ -55,7 +55,7 @@ class Mario extends Sprite {
             if (spriteCollisionEvent.sprite2 instanceof Block) {
                 setPicture(basePic = new Picture("MarioDeath.png"));
                 spriteCollisionEvent.sprite2.setActive(true);
-                JOptionPane.showMessageDialog(sc, "You lose! Game Over!");
+                JOptionPane.showMessageDialog(sc, "You lose! Game Over! \nCoins: " + score + "!");
                 System.exit(0);
             }
         }

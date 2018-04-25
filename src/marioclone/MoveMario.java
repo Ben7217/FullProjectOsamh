@@ -12,10 +12,14 @@ import java.io.IOException;
 import java.util.Random;
 
 public class MoveMario {
-    final public static Dimension BOARD_SIZE = new Dimension(800,400);
+    private final static Dimension BOARD_SIZE = new Dimension(800,400);
 
 
     public static void main(String[] args) throws IOException {
+
+        Random random = new Random();
+
+
         Mario mario = new Mario();
         mario.setVelX(0);
         mario.setVelY(0);
@@ -24,22 +28,23 @@ public class MoveMario {
         mario.setDrawingPriority(0);
 
 
-        BasicFrame bf = new BasicFrame("Mario Clone");
+        BasicFrame basicFrame = new BasicFrame("Mario Clone");
 
         //Adding Mario sprite to frame
         SpriteComponent spriteComponent = new SpriteComponent();
         spriteComponent.setPreferredSize(BOARD_SIZE);
-        bf.add("mario", spriteComponent, 0, 0, 1, 1);
+        basicFrame.add("mario", spriteComponent, 0, 0, 1, 1);
         spriteComponent.setPreferredSize(BOARD_SIZE);
         spriteComponent.addSprite(mario);
 
-        for(int i = 0; i <= 3; i++) {
+
+        for(int i = 0; i <= 5;  i++) {
             Block block = new Block();
             block.setDrawingPriority(-1);
             block.init(spriteComponent);
         }
 
-        for (int i = 0; i < 10; i++) {
+        for (int i = 0; i < 30;  i++) {
             Coin coin = new Coin();
             coin.setDrawingPriority(-2);
             coin.init(spriteComponent);
@@ -50,18 +55,17 @@ public class MoveMario {
         ground.init(spriteComponent);
 
 
-        bf.show();
+
+
+        basicFrame.show();
         spriteComponent.start(0, 10);
 
-        bf.addKeyListener(new KeyAdapter() {
+        basicFrame.addKeyListener(new KeyAdapter() {
 
             @Override
             public void keyPressed(KeyEvent e) {
                 if (e.getKeyCode() == KeyEvent.VK_UP) {
                     mario.setVelY(-2.0);
-//                    if (mario.top() == 400) {
-//                        mario.setY(319);
-//                    }
 
                 }
                 if (e.getKeyCode() == KeyEvent.VK_RIGHT) {

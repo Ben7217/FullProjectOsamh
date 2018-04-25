@@ -33,8 +33,11 @@ public class MoveMario {
         spriteComponent.setPreferredSize(BOARD_SIZE);
         spriteComponent.addSprite(mario);
 
-        Block block = new Block();
-        block.setDrawingPriority(-1);
+        for(int i = 0; i <= 3; i++) {
+            Block block = new Block();
+            block.setDrawingPriority(-1);
+            block.init(spriteComponent);
+        }
 
         Ground ground = new Ground();
         ground.setDrawingPriority(0);
@@ -43,7 +46,6 @@ public class MoveMario {
 
 
 
-        block.init(spriteComponent);
         ground.init(spriteComponent);
 
 

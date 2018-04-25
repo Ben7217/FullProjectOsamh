@@ -11,9 +11,11 @@ import basicshooter.Shooter;
 import javax.swing.*;
 import java.awt.*;
 import java.io.IOException;
+import java.util.Random;
 
 public class Block extends Sprite {
     private Picture basePic;
+    private Random rand = new Random();
     SpriteComponent sc;
 
     Block() throws IOException {
@@ -23,21 +25,46 @@ public class Block extends Sprite {
 
     public void init(SpriteComponent sc) {
         setPicture(basePic);
-        setX(400);
-        setY(280);
-        setVelX(-2);
+//        setX(400);
+//        setY(280);
 
-        sc.addSprite(this);
+
+        while (true) {
+            setVelX(-.5 * rand.nextDouble() - 1);
+            sc.addSprite(this);
+            setX(Game.RAND.nextInt(Game.BOARD_SIZE.width)-Game.SMALL);
+            setY(Game.RAND.nextInt(Game.BOARD_SIZE.height)-Game.SMALL);
+            if (Math.abs(getX() - Game.BOARD_SIZE.width / 2) < 2 * Game.BIG
+                    && Math.abs(getY() - Game.BOARD_SIZE.height / 2) < 2 * Game.BIG) {
+                // Overlaps with center, try again
+            } else {
+                break;
+            }
+        }
         this.sc = sc;
     }
 
 
     @Override
-    public void processEvent(SpriteCollisionEvent se) {
+    public void processEvent(SpriteCollisionEvent spriteCollisionEvent) {
+        if(spriteCollisionEvent.eventType == CollisionEventType.WALL_INVISIBLE) {
+            if (spriteCollisionEvent.xlo) {
+                setX(sc.getSize().width - getWidth());
+            }
+            if (spriteCollisionEvent.xhi) {
+                setX(0);
+            }
+            if (spriteCollisionEvent.ylo) {
+                setY(sc.getSize().height - getHeight());
+            }
+            if (spriteCollisionEvent.yhi) {
+                setY(0);
+            }
+        }
 
-        if (se.eventType == CollisionEventType.SPRITE) {
-            if (se.sprite2 instanceof Mario) {
-                se.sprite2.setActive(false);
+        if (spriteCollisionEvent.eventType == CollisionEventType.SPRITE) {
+            if (spriteCollisionEvent.sprite2 instanceof Mario) {
+                spriteCollisionEvent.sprite2.setActive(false);
                 JOptionPane.showMessageDialog(sc, "You lose! Game Over!");
                 System.exit(0);
             }

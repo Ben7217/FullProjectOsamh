@@ -24,7 +24,7 @@ class Mario extends Sprite {
     public int i = 0;
     private int level = 1;
     public static int getLevel = 0;
-    public static int[] coinValueNeededToAdvance = {10, 25, 40, 50, 70};
+    public static int[] coinValueNeededToAdvance = {10, 15, 20, 50, 70};
 
 
     SpriteComponent sc;
@@ -60,14 +60,14 @@ class Mario extends Sprite {
             if (spriteCollisionEvent.sprite2 instanceof Coin) {
                 clip.play();
                 spriteCollisionEvent.sprite2.setActive(false);
-                score++;
+                Mario.score++;
             }
         }
 
         if (spriteCollisionEvent.eventType == CollisionEventType.SPRITE) {
             if (spriteCollisionEvent.sprite2 instanceof QuestionBlocks) {
                 spriteCollisionEvent.sprite2.setActive(false);
-                score = score + 5;
+                Mario.score = score + 5;
             }
 
 
@@ -83,13 +83,25 @@ class Mario extends Sprite {
 
                 level++;
                 getLevel++;
-                Game.main(null);
+
+                //Creating a new thread/frame
+
+                return;
+//                Game.main(null);
             }
 
             if (spriteCollisionEvent.sprite2 instanceof FlyingTurtle || spriteCollisionEvent.sprite2 instanceof ShroomMob) {
                 setPicture(basePic = new Picture("MarioDeath.png"));
                 spriteCollisionEvent.sprite2.setActive(true);
                 JOptionPane.showMessageDialog(sc, "You lose! Game Over! \nCoins: " + score + "!");
+
+                if(spriteCollisionEvent.sprite2 instanceof FlyingTurtle) {
+                    System.out.println("Collided with a Flying Turtle");
+                }
+
+                if(spriteCollisionEvent.sprite2 instanceof ShroomMob) {
+                    System.out.println("Collided with a Shroom");
+                }
                 System.exit(0);
 
             }

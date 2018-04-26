@@ -47,6 +47,8 @@ public class FlyingTurtle extends Sprite {
         if (spriteCollisionEvent.eventType == CollisionEventType.WALL_INVISIBLE) {
 
             if (!spriteCollisionEvent.xlo) {
+                setX(rand.nextInt(MoveMario.BOARD_SIZE.width));
+
             } else {
                 setX(spriteComponent.getSize().width - getWidth());
             }

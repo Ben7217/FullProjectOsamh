@@ -2,6 +2,8 @@ package marioclone;
 
 import basicgraphics.BasicFrame;
 import basicgraphics.SpriteComponent;
+
+import javax.swing.*;
 import java.awt.*;
 import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
@@ -31,9 +33,14 @@ public class MoveMario {
         SpriteComponent spriteComponent = new SpriteComponent();
         spriteComponent.setPreferredSize(BOARD_SIZE);
         basicFrame.add("mario", spriteComponent, 0, 0, 1, 1);
-        spriteComponent.setPreferredSize(BOARD_SIZE);
+
 
         spriteComponent.addSprite(mario);
+
+//        JLabel jLabel = new JLabel();
+//        basicFrame.add("score", jLabel,0 , 0, 0, 0);
+//        Mario.score++;
+//        jLabel.setText("Coins " + Mario.score);
 
         Ground ground = new Ground();
         ground.setDrawingPriority(0);
@@ -52,7 +59,9 @@ public class MoveMario {
 
 
 
+
         if (Game.gameLevel == 0) {
+//            basicFrame.show();
             for (int i = 0; i <= 20; i++) {
                 coin = new Coin();
                 coin.setDrawingPriority(-2);
@@ -80,6 +89,8 @@ public class MoveMario {
         }
 
         if (Game.gameLevel == 1) {
+//            basicFrame.dispose();
+//            basicFrame.show();
             for (int i = 0; i <= 30; i++) {
                 coin = new Coin();
                 coin.setDrawingPriority(-2);
@@ -105,6 +116,8 @@ public class MoveMario {
 
         }
         if (Game.gameLevel == 2) {
+//            basicFrame.dispose();
+//            basicFrame.show();
             for (int i = 0; i <= 45; i++) {
                 coin = new Coin();
                 coin.setDrawingPriority(-2);
@@ -130,6 +143,8 @@ public class MoveMario {
         }
 
         if (Game.gameLevel == 3) {
+//            basicFrame.dispose();
+//            basicFrame.show();
             for (int i = 0; i <= 55; i++) {
                 coin = new Coin();
                 coin.setDrawingPriority(-2);
@@ -179,8 +194,9 @@ public class MoveMario {
 
             }
         }
-        basicFrame.show();
+
         spriteComponent.start(0, 10);
+        basicFrame.show();
 
         basicFrame.addKeyListener(new KeyAdapter() {
 

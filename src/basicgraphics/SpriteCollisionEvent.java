@@ -13,6 +13,7 @@ public class SpriteCollisionEvent {
     public final Sprite sprite2;
     public final boolean xlo, xhi, ylo, yhi;
     public final CollisionEventType eventType;
+
     public SpriteCollisionEvent(boolean xlo,boolean xhi,boolean ylo,boolean yhi, CollisionEventType ct) { 
         sprite2 = null; 
         this.xlo = xlo;

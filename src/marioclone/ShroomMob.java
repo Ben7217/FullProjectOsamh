@@ -24,6 +24,7 @@ public class ShroomMob extends Sprite {
             setX(675);
         }
     }
+
     public void init(SpriteComponent sc) {
         basePic = new Picture("Shroom.gif");
         setPicture(basePic);
@@ -44,6 +45,7 @@ public class ShroomMob extends Sprite {
         if (spriteCollisionEvent.eventType == CollisionEventType.WALL_INVISIBLE) {
 
             if (!spriteCollisionEvent.xlo) {
+                setVelX(-.5 * rand.nextDouble() - 1);
             } else {
                 setX(spriteComponent.getSize().width - getWidth());
             }

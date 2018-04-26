@@ -24,8 +24,6 @@ public class Block extends Sprite {
         basePic = new Picture("Mario_brick.png");
         setPicture(basePic);
 
-
-            setVelX(-.5 * rand.nextDouble() - 1);
             sc.addSprite(this);
             setX(rand.nextInt(MoveMario.BOARD_SIZE.width));
             setY(rand.nextInt(MoveMario.BOARD_SIZE.height - 100) - 5);
@@ -35,31 +33,14 @@ public class Block extends Sprite {
 
     }
 
-
     @Override
     public void processEvent(SpriteCollisionEvent spriteCollisionEvent) {
-        if(spriteCollisionEvent.eventType == CollisionEventType.WALL_INVISIBLE) {
-            if (!spriteCollisionEvent.xlo) {
-            } else {
-                setX(sc.getSize().width - getWidth());
-            }
-            if (spriteCollisionEvent.xhi) {
-                setX(0);
-            }
-            if (spriteCollisionEvent.ylo) {
-                setY(sc.getSize().height - getHeight());
-            }
-            if (spriteCollisionEvent.yhi) {
-                setY(0);
+        if(spriteCollisionEvent.eventType == CollisionEventType.SPRITE) {
+            if(spriteCollisionEvent.sprite2 instanceof Mario) {
+                //somewhere in here implement way to allow Mario to jump on blocks.
             }
         }
 
-//        if (spriteCollisionEvent.eventType == CollisionEventType.SPRITE) {
-//            if (spriteCollisionEvent.sprite2 instanceof Mario) {
-//                spriteCollisionEvent.sprite2.setActive(true);
-//
-//            }
-//        }
     }
 
 

@@ -20,7 +20,6 @@ public class Ground extends Sprite {
         setPicture(basePic);
         setX(0);
         setY(350);
-
         sc.addSprite(this);
         this.sc = sc;
     }

@@ -28,7 +28,7 @@ public class Coin extends Sprite{
             setVelX(-.5 * rand.nextDouble() - 1);
             sc.addSprite(this);
             setX(Game.RAND.nextInt(Game.BOARD_SIZE.width)-Game.SMALL);
-            setY(Game.RAND.nextInt(Game.BOARD_SIZE.height)-Game.SMALL);
+            setY(Game.RAND.nextInt(Game.BOARD_SIZE.height - 75)-Game.SMALL);
          {
                 break;
             }
@@ -37,19 +37,21 @@ public class Coin extends Sprite{
     }
     @Override
     public void processEvent(SpriteCollisionEvent spriteCollisionEvent) {
-        if (spriteCollisionEvent.xlo) {
-            setX(sc.getSize().width-getWidth());
+        if(spriteCollisionEvent.eventType == CollisionEventType.WALL_INVISIBLE) {
+            if (!spriteCollisionEvent.xlo) {
+            } else {
+                setX(sc.getSize().width - getWidth());
+            }
+            if (spriteCollisionEvent.xhi) {
+                setX(0);
+            }
+            if (spriteCollisionEvent.ylo) {
+                setY(sc.getSize().height - getHeight());
+            }
+            if (spriteCollisionEvent.yhi) {
+                setY(0);
+            }
         }
-        if (spriteCollisionEvent.xhi) {
-            setX(0);
-        }
-        if (spriteCollisionEvent.ylo) {
-            setY(sc.getSize().height-getHeight());
-        }
-        if (spriteCollisionEvent.yhi) {
-            setY(0);
-        }
-
 
     }
 

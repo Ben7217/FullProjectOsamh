@@ -10,8 +10,10 @@ import basicgraphics.Sprite;
 import basicgraphics.SpriteCollisionEvent;
 import basicgraphics.SpriteComponent;
 import basicgraphics.images.Picture;
+import basicgraphics.sounds.ReusableClip;
 
 import javax.swing.*;
+import java.applet.AudioClip;
 import java.io.IOException;
 
 
@@ -45,6 +47,8 @@ class Mario extends Sprite {
         }
     }
 
+    AudioClip clip = new ReusableClip("smw_coin.wav");
+
     @Override
     public void processEvent(SpriteCollisionEvent spriteCollisionEvent) {
         if (spriteCollisionEvent.eventType == CollisionEventType.WALL) {
@@ -54,6 +58,7 @@ class Mario extends Sprite {
 
         if (spriteCollisionEvent.eventType == CollisionEventType.SPRITE) {
             if (spriteCollisionEvent.sprite2 instanceof Coin) {
+                clip.play();
                 spriteCollisionEvent.sprite2.setActive(false);
                 score++;
             }
@@ -64,18 +69,17 @@ class Mario extends Sprite {
             if (Mario.score == coinValueNeededToAdvance[Game.gameLevel]) {
                 JOptionPane.showMessageDialog(null, "Level " + level + ", finished! Coins: " + Mario.score + "!");
                 Mario.score = 0;
-                Game.gameLevel++;
                 if (Game.gameLevel > 3) {
                     Game.gameLevel = 0;
                     level = 1;
                 }
+                Game.gameLevel++;
                 level++;
                 Game.main(null);
             }
 
-
         if (spriteCollisionEvent.eventType == CollisionEventType.SPRITE) {
-            if (spriteCollisionEvent.sprite2 instanceof Block) {
+            if (spriteCollisionEvent.sprite2 instanceof FlyingTurtle) {
                 setPicture(basePic = new Picture("MarioDeath.png"));
                 spriteCollisionEvent.sprite2.setActive(true);
                 JOptionPane.showMessageDialog(sc, "You lose! Game Over! \nCoins: " + score + "!");

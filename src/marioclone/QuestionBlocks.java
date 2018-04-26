@@ -40,21 +40,15 @@ public class QuestionBlocks extends Sprite {
 // setY(280);
 
 
-        while (true) {
-            setVelX(-.5 * rand.nextDouble() - 1);
-            sc.addSprite(this);
-            setX(basicshooter.Game.RAND.nextInt(basicshooter.Game.BOARD_SIZE.width)- basicshooter.Game.SMALL);
-            setY(basicshooter.Game.RAND.nextInt(basicshooter.Game.BOARD_SIZE.height)- basicshooter.Game.SMALL);
-            if (Math.abs(getX() - basicshooter.Game.BOARD_SIZE.width / 2) < 2 * basicshooter.Game.BIG
-                    && Math.abs(getY() - basicshooter.Game.BOARD_SIZE.height / 2) < 2 * Game.BIG) {
-                // Overlaps with center, try again
-            } else {
-                break;
-            }
-        }
-        this.sc = sc;
-    }
 
+            setVelX(- 2.5 * rand.nextDouble() - 1);
+            sc.addSprite(this);
+            setX(basicshooter.Game.RAND.nextInt(basicshooter.Game.BOARD_SIZE.width) - basicshooter.Game.SMALL);
+            setY(rand.nextInt(MoveMario.BOARD_SIZE.height - 100) - 5);
+
+        this.sc = sc;
+
+    }
 
     @Override
     public void processEvent(SpriteCollisionEvent spriteCollisionEvent) {

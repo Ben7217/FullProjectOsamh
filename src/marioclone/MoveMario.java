@@ -11,7 +11,8 @@ import java.util.Random;
 public class MoveMario {
     public final static Dimension BOARD_SIZE = new Dimension(800,400);
 
-    public static int level = 0;
+
+
 
     public static void runGame() throws IOException {
 
@@ -38,31 +39,146 @@ public class MoveMario {
         ground.setDrawingPriority(0);
         ground.init(spriteComponent);
 
+        Sky sky = new Sky();
+        sky.setDrawingPriority(-5);
+        sky.init(spriteComponent);
+
         for(int i = 0; i <= 2;  i++) {
             Block block = new Block();
             block.setDrawingPriority(-1);
             block.init(spriteComponent);
         }
 
-        for(int i = 0; i <= 3; i++) {
-            FlyingTurtle flyingTurtle = new FlyingTurtle();
-            flyingTurtle.setDrawingPriority(-1);
-            flyingTurtle.init(spriteComponent);
+
+
+
+        if (Game.gameLevel == 0) {
+            for (int i = 0; i <= 20; i++) {
+                coin = new Coin();
+                coin.setDrawingPriority(-2);
+                coin.init(spriteComponent);
+            }
+
+            for (int i = 0; i <= 2; i++) {
+                FlyingTurtle flyingTurtle = new FlyingTurtle();
+                flyingTurtle.setDrawingPriority(-1);
+                flyingTurtle.init(spriteComponent);
+            }
+
+            for (int i = 0; i <= 1; i++) {
+                ShroomMob shroom = new ShroomMob();
+                shroom.setDrawingPriority(-1);
+                shroom.init(spriteComponent);
+            }
+
+            for(int i = 0; i < 1; i++) {
+                QuestionBlocks questionBlocks = new QuestionBlocks();
+                questionBlocks.setDrawingPriority(-1);
+                questionBlocks.init(spriteComponent);
+
+            }
         }
 
-        for(int i = 0; i < 1; i++) {
-            QuestionBlocks questionBlocks = new QuestionBlocks();
-            questionBlocks.setDrawingPriority(-1);
-            questionBlocks.init(spriteComponent);
+        if (Game.gameLevel == 1) {
+            for (int i = 0; i <= 30; i++) {
+                coin = new Coin();
+                coin.setDrawingPriority(-2);
+                coin.init(spriteComponent);
+            }
+            for(int i = 0; i <= 4; i++) {
+                FlyingTurtle flyingTurtle = new FlyingTurtle();
+                flyingTurtle.setDrawingPriority(-1);
+                flyingTurtle.init(spriteComponent);
+            }
+
+            for(int i = 0; i <= 2; i++) {
+                ShroomMob shroom = new ShroomMob();
+                shroom.setDrawingPriority(-1);
+                shroom.init(spriteComponent);
+            }
+            for(int i = 0; i < 2; i++) {
+                QuestionBlocks questionBlocks = new QuestionBlocks();
+                questionBlocks.setDrawingPriority(-1);
+                questionBlocks.init(spriteComponent);
+
+            }
 
         }
+        if (Game.gameLevel == 2) {
+            for (int i = 0; i <= 45; i++) {
+                coin = new Coin();
+                coin.setDrawingPriority(-2);
+                coin.init(spriteComponent);
+            }
+            for(int i = 0; i <= 5; i++) {
+                FlyingTurtle flyingTurtle = new FlyingTurtle();
+                flyingTurtle.setDrawingPriority(-1);
+                flyingTurtle.init(spriteComponent);
+            }
 
-        for (int i = 0; i <= 12;  i++) {
-            coin = new Coin();
-            coin.setDrawingPriority(-2);
-            coin.init(spriteComponent);
+            for(int i = 0; i <= 3; i++) {
+                ShroomMob shroom = new ShroomMob();
+                shroom.setDrawingPriority(-1);
+                shroom.init(spriteComponent);
+            }
+            for(int i = 0; i < 2; i++) {
+                QuestionBlocks questionBlocks = new QuestionBlocks();
+                questionBlocks.setDrawingPriority(-1);
+                questionBlocks.init(spriteComponent);
+
+            }
         }
 
+        if (Game.gameLevel == 3) {
+            for (int i = 0; i <= 55; i++) {
+                coin = new Coin();
+                coin.setDrawingPriority(-2);
+                coin.init(spriteComponent);
+            }
+
+            for(int i = 0; i <= 5; i++) {
+                FlyingTurtle flyingTurtle = new FlyingTurtle();
+                flyingTurtle.setDrawingPriority(-1);
+                flyingTurtle.init(spriteComponent);
+            }
+
+            for(int i = 0; i <= 4; i++) {
+                ShroomMob shroom = new ShroomMob();
+                shroom.setDrawingPriority(-1);
+                shroom.init(spriteComponent);
+            }
+            for(int i = 0; i < 3; i++) {
+                QuestionBlocks questionBlocks = new QuestionBlocks();
+                questionBlocks.setDrawingPriority(-1);
+                questionBlocks.init(spriteComponent);
+
+            }
+        }
+
+        if (Game.gameLevel == 4) {
+            for (int i = 0; i <= 75; i++) {
+                coin = new Coin();
+                coin.setDrawingPriority(-2);
+                coin.init(spriteComponent);
+            }
+            for(int i = 0; i <= 6; i++) {
+                FlyingTurtle flyingTurtle = new FlyingTurtle();
+                flyingTurtle.setDrawingPriority(-1);
+                flyingTurtle.init(spriteComponent);
+            }
+
+            for(int i = 0; i <= 4; i++) {
+                ShroomMob shroom = new ShroomMob();
+                shroom.setDrawingPriority(-1);
+                shroom.init(spriteComponent);
+            }
+            for(int i = 0; i < 3; i++) {
+                QuestionBlocks questionBlocks = new QuestionBlocks();
+                questionBlocks.setDrawingPriority(-1);
+                questionBlocks.init(spriteComponent);
+
+            }
+        }
         basicFrame.show();
         spriteComponent.start(0, 10);
 
@@ -79,6 +195,7 @@ public class MoveMario {
                 }
                 if (e.getKeyCode() == KeyEvent.VK_LEFT) {
                     mario.setVelX(-1.5);
+
                 }
                 if (e.getKeyCode() == KeyEvent.VK_DOWN) {
                     mario.setVelX(0);
@@ -98,7 +215,7 @@ public class MoveMario {
             }
         });
 
-        System.out.println("Level One");
+        System.out.println("Level " + Game.gameLevel);
 
 
 

@@ -23,8 +23,8 @@ class Mario extends Sprite {
     public Game game = new Game();
     public int i = 0;
     private int level = 1;
-    public int[] coinValueNeededToAdvance = {2, 7, 12};
-
+    public static int getLevel = 0;
+    public static int[] coinValueNeededToAdvance = {10, 25, 40, 50, 70};
 
 
     SpriteComponent sc;
@@ -64,36 +64,41 @@ class Mario extends Sprite {
             }
         }
 
+        if (spriteCollisionEvent.eventType == CollisionEventType.SPRITE) {
+            if (spriteCollisionEvent.sprite2 instanceof QuestionBlocks) {
+                spriteCollisionEvent.sprite2.setActive(false);
+                score = score + 5;
+            }
+
 
             //Amount of coins needed to advance levels
-            if (Mario.score == coinValueNeededToAdvance[Game.gameLevel]) {
+            if (Mario.score >= coinValueNeededToAdvance[Game.gameLevel]) {
                 JOptionPane.showMessageDialog(null, "Level " + level + ", finished! Coins: " + Mario.score + "!");
                 Mario.score = 0;
-                if (Game.gameLevel > 3) {
+                Game.gameLevel++;
+                if (Game.gameLevel > 4) {
                     Game.gameLevel = 0;
                     level = 1;
                 }
-                Game.gameLevel++;
+
                 level++;
+                getLevel++;
                 Game.main(null);
             }
 
-        if (spriteCollisionEvent.eventType == CollisionEventType.SPRITE) {
-            if (spriteCollisionEvent.sprite2 instanceof FlyingTurtle) {
+            if (spriteCollisionEvent.sprite2 instanceof FlyingTurtle || spriteCollisionEvent.sprite2 instanceof ShroomMob) {
                 setPicture(basePic = new Picture("MarioDeath.png"));
                 spriteCollisionEvent.sprite2.setActive(true);
                 JOptionPane.showMessageDialog(sc, "You lose! Game Over! \nCoins: " + score + "!");
-                int result = JOptionPane.showConfirmDialog(null, "Are you sure you want to quit?",
-                        "Confirm Quit", JOptionPane.YES_NO_CANCEL_OPTION);
+                System.exit(0);
 
-                if (result == JOptionPane.YES_OPTION) {
-                    System.exit(0);
-                } else {
-                    Game.main(null);
-                }
             }
-        }
 
+
+
+
+
+        }
     }
 }
 

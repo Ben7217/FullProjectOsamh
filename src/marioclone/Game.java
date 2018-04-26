@@ -2,23 +2,17 @@ package marioclone;
 
 import java.io.IOException;
 
-public class Game implements Runnable{
+public class Game {
+
+    public static int gameLevel = 0;
 
 
-    public static void main(String[] args) throws IOException {
-        MoveMario.levelTwo();
-
-    }
-
-    @Override
-    public void run() {
+    public static void main(String[] args) {
         try {
-            MoveMario.levelTwo();
+            MoveMario.runGame();
         } catch (IOException e) {
             e.printStackTrace();
         }
-
-        System.out.println("Level Two");
     }
 
 }

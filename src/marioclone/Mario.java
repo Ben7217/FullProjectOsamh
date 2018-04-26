@@ -19,8 +19,11 @@ class Mario extends Sprite {
     public static int score = 0;
     private Picture basePic;
     public Game game = new Game();
+    public int i = 0;
+    private int level = 1;
+    public int[] coinValueNeededToAdvance = {2, 7, 12};
 
-    Object[] options = {"CONTINUE", "EXIT"};
+
 
     SpriteComponent sc;
 
@@ -28,43 +31,49 @@ class Mario extends Sprite {
         basePic = new Picture("Mario - Walk2.gif");
         setPicture(basePic);
     }
+
     private int count = 0;
 
     @Override
     public void preMove() {
         count++;
-        if(count == 100)
+        if (count == 100)
             setPicture(basePic = new Picture("Mario - Walk3.gif"));
-        else if(count == 200) {
+        else if (count == 200) {
             setPicture(basePic = new Picture("Mario - Walk1.gif"));
-            count=0;
+            count = 0;
         }
     }
 
     @Override
     public void processEvent(SpriteCollisionEvent spriteCollisionEvent) {
-        if(spriteCollisionEvent.eventType == CollisionEventType.WALL) {
+        if (spriteCollisionEvent.eventType == CollisionEventType.WALL) {
             setX(800);
             basePic = basePic.resize(1.1);
         }
+
         if (spriteCollisionEvent.eventType == CollisionEventType.SPRITE) {
             if (spriteCollisionEvent.sprite2 instanceof Coin) {
                 spriteCollisionEvent.sprite2.setActive(false);
                 score++;
-                if (Mario.score == 5) {
-                    JOptionPane.showMessageDialog(null, "Level one, finished! Coins: " + Mario.score + "!");
-                    (new Thread(new Game())).start();
-                }
-//                if (Mario.score == 5) {
-//                    JOptionPane.showMessageDialog(null, "Level two, finished! Coins: " + Mario.score + "!");
-//                    try {
-//                        MoveMario.levelTwo();
-//                    } catch (IOException e) {
-//                        e.printStackTrace();
-//                    }
-//                }
             }
         }
+
+
+            //Amount of coins needed to advance levels
+            if (Mario.score == coinValueNeededToAdvance[Game.gameLevel]) {
+                JOptionPane.showMessageDialog(null, "Level " + level + ", finished! Coins: " + Mario.score + "!");
+                Mario.score = 0;
+                Game.gameLevel++;
+                if (Game.gameLevel > 3) {
+                    Game.gameLevel = 0;
+                    level = 1;
+                }
+                level++;
+                Game.main(null);
+            }
+
+
         if (spriteCollisionEvent.eventType == CollisionEventType.SPRITE) {
             if (spriteCollisionEvent.sprite2 instanceof Block) {
                 setPicture(basePic = new Picture("MarioDeath.png"));
@@ -76,16 +85,17 @@ class Mario extends Sprite {
                 if (result == JOptionPane.YES_OPTION) {
                     System.exit(0);
                 } else {
-                    (new Thread(new Game())).start();
+                    Game.main(null);
                 }
             }
         }
 
     }
-
-
-
-
-
 }
+
+
+
+
+
+
 

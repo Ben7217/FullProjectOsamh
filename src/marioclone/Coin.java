@@ -14,7 +14,6 @@ import java.util.Random;
 
 public class Coin extends Sprite{
 
-    private int score = 0;
     private Picture basePic;
     private Random rand = new Random();
     SpriteComponent sc;

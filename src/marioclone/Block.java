@@ -14,34 +14,25 @@ import java.io.IOException;
 import java.util.Random;
 
 public class Block extends Sprite {
+
     private Picture basePic;
     private Random rand = new Random();
-    SpriteComponent sc;
 
-    Block() throws IOException {
-        basePic = new Picture("Mario_brick.png");
-        setPicture(basePic);
-    }
+    private SpriteComponent sc;
 
     public void init(SpriteComponent sc) {
+        basePic = new Picture("Mario_brick.png");
         setPicture(basePic);
-//        setX(400);
-//        setY(280);
 
 
-        while (true) {
             setVelX(-.5 * rand.nextDouble() - 1);
             sc.addSprite(this);
-            setX(Game.RAND.nextInt(Game.BOARD_SIZE.width)-Game.SMALL);
-            setY(Game.RAND.nextInt(Game.BOARD_SIZE.height)-Game.SMALL);
-            if (Math.abs(getX() - Game.BOARD_SIZE.width / 2) < 2 * Game.BIG
-                    && Math.abs(getY() - Game.BOARD_SIZE.height / 2) < 2 * Game.BIG) {
-                // Overlaps with center, try again
-            } else {
-                break;
-            }
-        }
-        this.sc = sc;
+            setX(rand.nextInt(MoveMario.BOARD_SIZE.width));
+            setY(rand.nextInt(MoveMario.BOARD_SIZE.height - 100) - 5);
+
+
+            this.sc = sc;
+
     }
 
 

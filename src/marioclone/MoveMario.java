@@ -83,6 +83,11 @@ public class MoveMario {
                 if (e.getKeyCode() == KeyEvent.VK_DOWN) {
                     mario.setVelX(0);
                 }
+//                if (e.getKeyCode() == KeyEvent.VK_SPACE) {
+//                    FireBall fireball = new FireBall();
+//                    fireball.init(sc,shooter,e.getX(),e.getY());
+//                }
+
             }
 
             @Override
